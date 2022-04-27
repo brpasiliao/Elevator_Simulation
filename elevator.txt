@@ -49,7 +49,6 @@ class Elevator
 
 
 Controller 
-    new Clock = Clock
     int statistics[];
     let flr = 0;
 
@@ -70,6 +69,7 @@ Controller
     main {
         // uses above loop/logic to maintain delayed_list & dispatch elevator
         // can generate people?
+        // maintains statistics gathered by the simulation
     }
 
 
