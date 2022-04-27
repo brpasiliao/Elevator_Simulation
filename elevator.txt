@@ -96,3 +96,31 @@ Unknown:
     Maybe add floor queue for elevator?
 */
 
+Notes:
+elevator could have a queue/list or 2D array of people and how many want to get off on a floor.
+need to keep track of the person to track and collect data on how long a person has to wait for the elevator
+(and how long they ride it to their desired floor)
+50% of the people board the elevator on floor 0, and the other 50% board equilikely on all other floors other than zero
+
+fel (future events list) is time ordered
+clock (keeps track of current time)
+a passenger is an event (synonymous) on the list
+
+loop: takes the next event from fel and performs it.
+    - clock is updated
+    - if it is a passenger arrival, generate next passenger arrival
+
+time in system = passenger waiting on floor for elevator + passenger waiting in elevator for floor
+    - generate one arrival (either on floor 0 or other floor)
+
+average time: every 1/10th of a minute, new arrival (on average)
+lambda = 10 : (1/lambda) = 0.1
+
+delayed list = events (not time ordered) that have already happened
+
+once a passenger exits the elevator, you lose track of them.
+so, we track their system time to gather data for the simulation (this is the time spent waiting
+for the elevator and time spent in elevator)(time between button press and arrival) + (time between stepping into elevator and stepping out)
+
+how to end the simulation:
+"end_of_simulation" (collecting data and outputting statistics) is the event at the end of the fel which is the last event on the FEL.
