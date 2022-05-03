@@ -124,3 +124,8 @@ for the elevator and time spent in elevator)(time between button press and arriv
 
 how to end the simulation:
 "end_of_simulation" (collecting data and outputting statistics) is the event at the end of the fel which is the last event on the FEL.
+
+
+
+elevator priority setting:
+    closest elevator that is not already moving in the opposite direction that the person wants to go to
