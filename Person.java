@@ -1,12 +1,14 @@
 import java.util.Random;
 
 public class Person implements Comparable<Person> {
-    private int floorFrom;          // start from 0
+    private int floorFrom;                  // start from 0
     private int floorTo;
-    private boolean direction;      // whch direction to go to, 0 - down, 1 - up
+    private boolean direction;              // which direction to go to, 0 - down, 1 - up
 
-    private float arrivalTime;
-    private float totalTime;
+    private float arrivalTime;              // time person arrives after previous
+    private float totalTime;                // time person spends in system
+    private float totalArrivalTime;         // time person arrives after start
+    private static float systemTime = 0;    // total time of the system
 
     public Person() {
         Random random = new Random();
@@ -22,6 +24,8 @@ public class Person implements Comparable<Person> {
 
         arrivalTime = (int)Math.round((-6 * Math.log(1 - random.nextFloat())));
         totalTime = 0;
+        systemTime += arrivalTime;
+        totalArrivalTime = systemTime;
     }
 
     public int getFloorFrom() {
