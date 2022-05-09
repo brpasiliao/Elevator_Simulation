@@ -11,7 +11,7 @@ class ElevatorSimulation {
     public static ArrayList<Person> peopleF3 = new ArrayList<Person>();
     public static ArrayList<Person> peopleF4 = new ArrayList<Person>();
     public static ArrayList<Person> peopleF5 = new ArrayList<Person>();
-    // public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
+    public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
 
     public static void main(final String[] args) {
         // List fel = new List();
@@ -36,7 +36,6 @@ class ElevatorSimulation {
 
                 e.fetch(peopleOnFloor);
             }
-            e.moving = false;
 
             e.direction = p.getDirection();
             for (int j = 0; j < peopleOnFloor.size(); j++) {
@@ -54,7 +53,6 @@ class ElevatorSimulation {
             if (e.direction) Collections.sort(e.peopleInside);
             else Collections.reverse(e.peopleInside);
 
-            e.moving = true;
             while (!e.peopleInside.isEmpty()) {
                 // handle if other people call elevator
 
@@ -69,25 +67,24 @@ class ElevatorSimulation {
                     e.peopleInside.remove(0);
                 }
             }
+            e.moving = false;
         }
     }
 
     // closest elevator picks person(s) up
     public static Elevator dispatch(Person p) {
-        Elevator closestElevator = elevators[0];
-        int minDistance = 5;
+        Elevator closestElevator = null;
+        int minDistance = 6;
 
         for (int i = 0; i < 4; i++) {
-            // if an elevator is closer to the person's floor than any other elevator
-            if (Math.abs(elevators[i].currentFloor - p.getFloorFrom()) < minDistance) {
-                // if the elevator is not moving in the wrong direction
-                if (!(elevators[i].moving && elevators[i].direction != p.getDirection())) {
-                    closestElevator = elevators[i];
-                    minDistance = Math.abs(elevators[i].currentFloor - p.getFloorFrom());
-                }
+            // if the elevator is not moving and is the closest to desired floor
+            if (!elevators[i].moving && Math.abs(elevators[i].currentFloor - p.getFloorFrom()) < minDistance) {
+                closestElevator = elevators[i];
+                minDistance = Math.abs(elevators[i].currentFloor - p.getFloorFrom());
             }
         }
-
+        
+        // if (closestElevator == null) return dispatch(p);
         return closestElevator;
     }
 
@@ -102,4 +99,8 @@ class ElevatorSimulation {
 }
 
 
-// if the elevator is not moving OR (it is moving BUT (in the right direction and is at least 1 floor behind) OR (the person's floor is its last))
+// if the elevator is not moving 
+// OR (it is moving BUT (in the right direction and is at least 1 floor behind) 
+//                  OR (the person's floor is its last))
+
+   

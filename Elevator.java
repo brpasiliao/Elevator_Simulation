@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Elevator {
 
     int currentFloor;           // 6 floors, 0-5
-    boolean moving;
+    boolean moving;             // whenever picking up people, or have people inside
     boolean direction;          // if moving, which direction, 0 - down, 1 - up
     ArrayList<Person> peopleInside;
 
