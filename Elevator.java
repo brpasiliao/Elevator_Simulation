@@ -12,13 +12,17 @@ public class Elevator {
     final float timeMove = 6;   // time to get from floor to floor
     final float timeOn = 2;     // time for people to get on the elevator
     final float timeOff = 2;    // time for people to get off the elevator
+
+    int id;
     
-    public Elevator() {
+    public Elevator(int i) {
         currentFloor = 0; 
         moving = false;
         direction = true; 
         peopleAffected = new ArrayList<Person>();
         peopleInside = new ArrayList<Person>();
+
+        id = i;
     }
 
     void move() {

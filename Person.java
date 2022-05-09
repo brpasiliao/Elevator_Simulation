@@ -12,7 +12,9 @@ public class Person {
     float arrivalTime;                      // time person arrives after previous
     float nextTime;                         // system time when the person's next event will happen
 
-    public Person() {
+    int id;
+
+    public Person(int i) {
         Random random = new Random();
         if (random.nextFloat() < 0.5) floorFrom = 0;
         else floorFrom = random.nextInt(5) + 1;
@@ -29,6 +31,8 @@ public class Person {
         arrivalTime = (int)Math.round((-6 * Math.log(1 - random.nextFloat())));
         systemTime += arrivalTime;
         nextTime = systemTime;
+
+        id = i;
     }
 
     public int getFloorFrom() {

@@ -8,9 +8,14 @@ class ElevatorSimulation {
     public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
 
     public static void main(final String[] args) {
+        // initializes elevators
+        for (int i = 0; i < 4; i++) {
+            elevators[i] = new Elevator(i);
+        }
+
         // initializes people
-        for (int i = 0; i < 100; i++) {
-            peopleSystem.add(new Person());
+        for (int i = 0; i < 10; i++) {
+            peopleSystem.add(new Person(i));
         }
 
         Person p;
@@ -24,11 +29,13 @@ class ElevatorSimulation {
                 if (p.elevator == null) {
                     // call an elevator
                     Elevator e = dispatch(p);
+                    System.out.println("Person" + p.id + " called for an elevator from floor " + p.getFloorFrom() + " to " + p.getFloorTo());
 
                     // if no available elevators
                     if (e == null) {
                         // try again next time
                         p.nextTime = peopleSystem.get(1).nextTime;
+                        System.out.println("Person" + p.id + " cannot call any elevators");
                     // assigned an elevator
                     } else {
                         // send elevator to person
@@ -36,6 +43,7 @@ class ElevatorSimulation {
                         e.moving = true;
                         p.elevator = e;
                         e.peopleAffected.add(p);
+                        System.out.println("Person" + p.id + " is waiting for Elevator" + e.id);
                     }
                 } 
                 // if p has an elevator being sent to them
@@ -60,23 +68,25 @@ class ElevatorSimulation {
                     Collections.sort(p.elevator.peopleInside, Person.FloorUpComparator);
                 else Collections.sort(p.elevator.peopleInside, Person.FloorDownComparator);
                 
+                System.out.println("Person" + p.id + " entered Elevator" + p.elevator.id);
                 p.status = "riding";
             }
 
             // if p is riding the elevator
             else if (p.status == "riding") {
                 p.elevator.move();
+                System.out.println("Person" + p.id + " is riding Elevator" + p.elevator.id);
 
                 // remove people as long as there are those who need to get off on the elevator's current floor
-                while (p.elevator.peopleInside.get(0).getFloorTo() == p.elevator.currentFloor) {
+                while (p.elevator.peopleInside.get(0).getFloorTo() == p.elevator.currentFloor)
                     p.elevator.peopleInside.get(0).status = "leaving";
-                    p.elevator.peopleInside.remove(0);
-                }
             }
 
             // if p is leaving the elevator
             else if (p.status == "leaving") {
                 p.elevator.leave(p);
+                System.out.println("Person" + p.id + " left");
+
                 peopleSystem.remove(0);
             }
 
