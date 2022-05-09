@@ -1,14 +1,16 @@
 import java.util.Random;
+import java.util.Comparator;
 
-public class Person implements Comparable<Person> {
+public class Person {
     private int floorFrom;                  // start from 0
     private int floorTo;
     private boolean direction;              // which direction to go to, 0 - down, 1 - up
+    String status;                          // waiting, entering, riding, leaving
+    Elevator elevator;
 
-    private float arrivalTime;              // time person arrives after previous
-    private float totalTime;                // time person spends in system
-    private float totalArrivalTime;         // time person arrives after start
-    private static float systemTime = 0;    // total time of the system
+    private static float systemTime = 0;
+    float arrivalTime;                      // time person arrives after previous
+    float nextTime;                         // system time when the person's next event will happen
 
     public Person() {
         Random random = new Random();
@@ -21,11 +23,12 @@ public class Person implements Comparable<Person> {
         }
 
         direction = floorTo - floorFrom > 0;
+        status = "waiting";
+        elevator = null;
 
         arrivalTime = (int)Math.round((-6 * Math.log(1 - random.nextFloat())));
-        totalTime = 0;
         systemTime += arrivalTime;
-        totalArrivalTime = systemTime;
+        nextTime = systemTime;
     }
 
     public int getFloorFrom() {
@@ -40,16 +43,18 @@ public class Person implements Comparable<Person> {
         return direction;
     }
 
-    public float getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void addTotalTime(float t) {
-        totalTime += t;
-    }
-
-    @Override
-    public int compareTo(Person p) {
-        return getFloorTo() - p.getFloorTo();
-    }
+    // Comparator for sorting people by time
+    public static Comparator<Person> TimeComparator = new Comparator<Person>() {
+        public int compare(Person a, Person b) {
+            return Float.compare(a.nextTime, b.nextTime);
+        }
+    };
+    
+    // Comparator for sorting people by floor
+    public static Comparator<Person> FloorComparator = new Comparator<Person>() {
+    
+        public int compare(Person a, Person b) {
+            return Integer.compare(a.getFloorTo(), b.getFloorTo());
+       }
+    };
 }
