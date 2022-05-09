@@ -7,6 +7,10 @@ class ElevatorSimulation {
     public static Elevator[] elevators = new Elevator[4];
     public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
 
+    //collecting simulation data from passengers
+    static float waitingTime[]; // time passengers spend waiting for elevator
+    static float systemTime[]; //system time equals waiting time plus riding time
+
     public static void main(final String[] args) {
         // initializes elevators
         for (int i = 0; i < 4; i++) {
@@ -15,7 +19,8 @@ class ElevatorSimulation {
 
         // initializes people
         for (int i = 0; i < 10; i++) {
-            peopleSystem.add(new Person(i));
+            peopleSystem.add(new Person());
+            //waitingTime[peopleSystem.get(i).] = 0;   // use passenger id to keep track of them in the simulation instead of i
         }
 
         Person p;
@@ -25,6 +30,7 @@ class ElevatorSimulation {
 
             // if p is waiting for an elevator
             if (p.status == "waiting") {
+                //waitingTime[i] = waitingTime[i] + p.nextTime;   // use passenger id to keep track of them in the simulation instead of i
                 // if p does not have an elevator being sent to them
                 if (p.elevator == null) {
                     // call an elevator
@@ -36,6 +42,7 @@ class ElevatorSimulation {
                         // try again next time
                         p.nextTime = peopleSystem.get(1).nextTime;
                         System.out.println("Person" + p.id + " cannot call any elevators");
+                        //waitingTime[i] = waitingTime[i] + p.nextTime;  // // use passenger id to keep track of them in the simulation
                     // assigned an elevator
                     } else {
                         // send elevator to person
@@ -93,6 +100,8 @@ class ElevatorSimulation {
             // sort to chronological order of events
             Collections.sort(peopleSystem, Person.TimeComparator);
         }
+
+        // using collected data to calculate results, and outputting them
     }
 
     // closest elevator picks person(s) up
