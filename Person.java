@@ -8,7 +8,7 @@ public class Person {
     String status;                          // waiting, entering, riding, leaving
     Elevator elevator;
 
-    private static float systemTime = 0;
+    private static float systemTime = 0;    // sum of arrival times
     float arrivalTime;                      // time person arrives after previous
     float nextTime;                         // system time when the person's next event will happen
 
@@ -50,11 +50,17 @@ public class Person {
         }
     };
     
-    // Comparator for sorting people by floor
-    public static Comparator<Person> FloorComparator = new Comparator<Person>() {
-    
+    // Comparator for sorting people by floor ascending
+    public static Comparator<Person> FloorUpComparator = new Comparator<Person>() {
         public int compare(Person a, Person b) {
             return Integer.compare(a.getFloorTo(), b.getFloorTo());
+       }
+    };
+
+    // Comparator for sorting people by floor descending
+    public static Comparator<Person> FloorDownComparator = new Comparator<Person>() {
+        public int compare(Person a, Person b) {
+            return Integer.compare(b.getFloorTo(), a.getFloorTo());
        }
     };
 }

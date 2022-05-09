@@ -40,7 +40,7 @@ class ElevatorSimulation {
                 } 
                 // if p has an elevator being sent to them
                 if (p.elevator != null) {
-                    // if p 
+                    // if elevator is on the same floor as person
                     if (p.elevator.currentFloor == p.getFloorFrom()) {
                         p.status = "entering";
                     } else {
@@ -53,8 +53,13 @@ class ElevatorSimulation {
             else if (p.status == "entering") {
                 p.elevator.enter();
                 p.elevator.peopleInside.add(p);
-                // include reverse
-                Collections.sort(p.elevator.peopleInside, Person.FloorComparator);
+                p.elevator.setDirection(p.getFloorTo());
+
+                // sort by nearest floor
+                if (p.elevator.direction) 
+                    Collections.sort(p.elevator.peopleInside, Person.FloorUpComparator);
+                else Collections.sort(p.elevator.peopleInside, Person.FloorDownComparator);
+                
                 p.status = "riding";
             }
 
@@ -62,6 +67,7 @@ class ElevatorSimulation {
             else if (p.status == "riding") {
                 p.elevator.move();
 
+                // remove people as long as there are those who need to get off on the elevator's current floor
                 while (p.elevator.peopleInside.get(0).getFloorTo() == p.elevator.currentFloor) {
                     p.elevator.peopleInside.get(0).status = "leaving";
                     p.elevator.peopleInside.remove(0);
@@ -74,6 +80,7 @@ class ElevatorSimulation {
                 peopleSystem.remove(0);
             }
 
+            // sort to chronological order of events
             Collections.sort(peopleSystem, Person.TimeComparator);
         }
     }
