@@ -54,6 +54,19 @@ public class Person {
     public boolean getDirection() {
         return direction;
     }
+    
+    public float getArrivalTime(){
+        return arrivalTime;
+    }
+    public float getNextTime(){
+        return nextTime;
+    }
+    public int getId(){
+        return id;
+    }
+    public Elevator getElevator(){
+        return elevator;
+    }
 
     // Comparator for sorting people by time
     public static Comparator<Person> TimeComparator = new Comparator<Person>() {

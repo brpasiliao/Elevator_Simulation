@@ -47,7 +47,7 @@ public class Elevator {
 
         if (peopleInside.isEmpty()) moving = false; 
     }
-
+    
     void setDirection(int floorTo) {
         if (currentFloor < floorTo) direction = true;
         else direction = false;

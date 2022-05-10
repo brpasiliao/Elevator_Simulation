@@ -8,8 +8,9 @@ class ElevatorSimulation {
     public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
 
     //collecting simulation data from passengers
-    static float waitingTime[]; // time passengers spend waiting for elevator
-    static float systemTime[]; //system time equals waiting time plus riding time
+    static float[] waitingTime; // time passengers spend waiting for elevator
+    static float[] ridingTime; // time passengers spend in the elevator
+    static float[] systemTime; //system time equals waiting time plus riding time
 
     public static void main(final String[] args) {
     // public static void program() {
@@ -19,21 +20,22 @@ class ElevatorSimulation {
         }
 
         // initializes people
-        for (int i = 0; i < 100; i++) {
+        for (int i = 1; i < 11; i++) {
             peopleSystem.add(new Person(i));
-            //waitingTime[peopleSystem.get(i).] = 0;   // use passenger id to keep track of them in the simulation instead of i
+            waitingTime[i] = 0.0f; //all waiting times set to zero initially
         }
 
         Person p;
+
         while (!peopleSystem.isEmpty()) {
             // handles p assuming p is the next event to happen
             p = peopleSystem.get(0);
 
             // if p is waiting for an elevator
             if (p.status == "waiting") {
-                //waitingTime[i] = waitingTime[i] + p.nextTime;   // use passenger id to keep track of them in the simulation instead of i
+                waitingTime[p.getId()] += p.nextTime; // increases waiting time by however much
                 // if p does not have an elevator being sent to them
-                if (p.elevator == null) {
+                if (p.getElevator() == null) {
                     // call an elevator
                     if (p.first) {
                         System.out.println(p.nextTime + ":\tPerson" + p.id + " arrived on floor " + p.getFloorFrom() + " to " + p.getFloorTo());
