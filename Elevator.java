@@ -44,7 +44,6 @@ public class Elevator {
         for (int i = 0; i < peopleAffected.size(); i++) {
             peopleAffected.get(i).nextTime += timeOff;
             peopleAffected.remove(p);
-            peopleInside.remove(0);
         }
 
         if (peopleInside.isEmpty()) moving = false; 

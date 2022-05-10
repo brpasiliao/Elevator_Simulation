@@ -6,6 +6,7 @@ public class Person {
     private int floorTo;
     private boolean direction;              // which direction to go to, 0 - down, 1 - up
     String status;                          // waiting, entering, riding, leaving
+    boolean stuck;
     Elevator elevator;
 
     private static float systemTime = 0;    // sum of arrival times
@@ -26,9 +27,12 @@ public class Person {
 
         direction = floorTo - floorFrom > 0;
         status = "waiting";
+        stuck = false;
         elevator = null;
 
-        arrivalTime = (int)Math.round((-6 * Math.log(1 - random.nextFloat())));
+        // random float averages to 6, rounded to 2 decimal places
+        // arrivalTime = Math.round((-6 * (float)Math.log(1 - random.nextFloat())) * 100) / 100f;
+        arrivalTime = -6 * (float)Math.log(1 - random.nextFloat());
         systemTime += arrivalTime;
         nextTime = systemTime;
 
