@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 import java.lang.Math;
 
 class ElevatorSimulation {
@@ -12,12 +11,6 @@ class ElevatorSimulation {
     static float waitingTime[]; // time passengers spend waiting for elevator
     static float systemTime[]; //system time equals waiting time plus riding time
 
-    // public static void main(final String[] args) {
-    //     Random random = new Random();
-    //     for (int i = 0; i < 100; i++)
-    //         System.out.println(Math.round((-6 * (float)Math.log(1 - random.nextFloat())) * 100) / 100f);
-    // }
-
     public static void main(final String[] args) {
     // public static void program() {
         // initializes elevators
@@ -26,7 +19,7 @@ class ElevatorSimulation {
         }
 
         // initializes people
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             peopleSystem.add(new Person(i));
             //waitingTime[peopleSystem.get(i).] = 0;   // use passenger id to keep track of them in the simulation instead of i
         }
@@ -42,15 +35,18 @@ class ElevatorSimulation {
                 // if p does not have an elevator being sent to them
                 if (p.elevator == null) {
                     // call an elevator
+                    if (p.first) {
+                        System.out.println(p.nextTime + ":\tPerson" + p.id + " arrived on floor " + p.getFloorFrom() + " to " + p.getFloorTo());
+                        p.first = false;
+                    }
                     Elevator e = dispatch(p);
-                    System.out.println(p.nextTime + ":\tPerson" + p.id + " arrived on floor " + p.getFloorFrom());
 
                     // if no available elevators
                     if (e == null) {
                         // try again next time
                         System.out.println(p.nextTime + ":\tPerson" + p.id + " cannot call any elevators");
                         p.stuck = true;
-                        moveBack(p);
+                        unStuck(p);
                         //waitingTime[i] = waitingTime[i] + p.nextTime;  // // use passenger id to keep track of them in the simulation
                     // assigned an elevator
                     } else {
@@ -59,7 +55,6 @@ class ElevatorSimulation {
                         e.moving = true;
                         p.elevator = e;
                         e.peopleAffected.add(p);
-                        System.out.println(p.nextTime + ":\tPerson" + p.id + " is waiting for Elevator" + e.id);
                     }
                 } 
                 // if p has an elevator being sent to them
@@ -68,6 +63,7 @@ class ElevatorSimulation {
                     if (p.elevator.currentFloor == p.getFloorFrom()) {
                         p.status = "entering";
                     } else {
+                        System.out.println(p.nextTime + ":\tPerson" + p.id + " is waiting for Elevator" + p.elevator.id + " (" + p.elevator.currentFloor + "/" + p.getFloorFrom() + ")");
                         p.elevator.move();
                     }
                 }
@@ -90,7 +86,7 @@ class ElevatorSimulation {
 
             // if p is riding the elevator
             else if (p.status == "riding") {
-                System.out.println(p.nextTime + ":\tPerson" + p.id + " is riding Elevator" + p.elevator.id);
+                System.out.println(p.nextTime + ":\tPerson" + p.id + " is riding Elevator" + p.elevator.id + " (" + p.elevator.currentFloor + "/" + p.getFloorTo() + ")");
                 p.elevator.move();
 
                 // remove people as long as there are those who need to get off on the elevator's current floor
@@ -104,7 +100,7 @@ class ElevatorSimulation {
             else if (p.status == "leaving") {
                 System.out.println(p.nextTime + ":\tPerson" + p.id + " is leaving");
                 p.elevator.leave(p);
-                System.out.println(p.nextTime + ":\tPerson" + p.id + " left on floor " + p.getFloorTo());
+                System.out.println(p.nextTime + ":\tPerson" + p.id + " left from floor " + p.getFloorFrom() + " to " + p.getFloorTo());
 
                 peopleSystem.remove(0);
             }
@@ -123,8 +119,10 @@ class ElevatorSimulation {
 
         for (int i = 0; i < 4; i++) {
             // if elevator is on the same floor and going the same way
-            if (elevators[i].moving && elevators[i].currentFloor == p.getFloorFrom() && elevators[i].direction == p.getDirection())
+            if (elevators[i].moving && elevators[i].currentFloor == p.getFloorFrom() && elevators[i].direction == p.getDirection()) {
                 closestElevator = elevators[i];
+                minDistance = 0;
+            }
             // else if the elevator is not moving and is the closest to desired floor
             else if (!elevators[i].moving) {
                 if (Math.abs(elevators[i].currentFloor - p.getFloorFrom()) < minDistance) {
@@ -138,17 +136,21 @@ class ElevatorSimulation {
     }
 
     // moves person that cannot call elevator behind the next person that is not also stuck
-    public static void moveBack(Person stuckP) {
+    public static void unStuck(Person stuckP) {
         int i = 0;
         Person p = peopleSystem.get(i);
-        while (p.stuck) {
+        while (p.stuck && i < peopleSystem.size()-1) {
             i++;
             p = peopleSystem.get(i);
         }
 
         stuckP.nextTime = peopleSystem.get(i).nextTime;
-        for (int j = 0; j < i; j++) 
-            peopleSystem.set(j, peopleSystem.get(j+1));
-        peopleSystem.set(i, stuckP);
+        shiftDown(stuckP, i);
+    }
+
+    public static void shiftDown (Person p, int pos) {
+        for (int i = 0; i < pos; i++) 
+            peopleSystem.set(i, peopleSystem.get(i+1));
+        peopleSystem.set(pos, p);
     }
 }

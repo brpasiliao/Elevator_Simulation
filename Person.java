@@ -6,10 +6,12 @@ public class Person {
     private int floorTo;
     private boolean direction;              // which direction to go to, 0 - down, 1 - up
     String status;                          // waiting, entering, riding, leaving
+    boolean first;
+    // boolean insert;
     boolean stuck;
     Elevator elevator;
 
-    private static float systemTime = 0;    // sum of arrival times
+    static float systemTime = 0;    // sum of arrival times
     float arrivalTime;                      // time person arrives after previous
     float nextTime;                         // system time when the person's next event will happen
 
@@ -22,16 +24,18 @@ public class Person {
 
         if (floorFrom != 0 && random.nextFloat() < 0.5) floorTo = 0;
         else {
+            floorTo = random.nextInt(5) + 1;
             while (floorTo == floorFrom) floorTo = random.nextInt(5) + 1;
         }
 
         direction = floorTo - floorFrom > 0;
         status = "waiting";
+        first = true;
+        // insert = false;
         stuck = false;
         elevator = null;
 
         // random float averages to 6, rounded to 2 decimal places
-        // arrivalTime = Math.round((-6 * (float)Math.log(1 - random.nextFloat())) * 100) / 100f;
         arrivalTime = -6 * (float)Math.log(1 - random.nextFloat());
         systemTime += arrivalTime;
         nextTime = systemTime;
