@@ -179,9 +179,9 @@ class ElevatorSimulation {
 
     public static void displayVisuals(Elevator[] elevators){ // Extra Credit for Visualization
 
-        for(int i = 6; i > 0 ; i--){
+        for(int i = 5; i > -1 ; i--){
             System.out.print(i+": ");
-            for (int j = 0; j > 4; j++){
+            for (int j = 0; j < 4; j++){
                 if(elevators[j].currentFloor == i){
                     System.out.print("[] ");
                 }
