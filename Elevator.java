@@ -25,6 +25,13 @@ public class Elevator {
     }
 
     void move() {
+        //after debugging the infinite loop, elevator was going to floors > 5 or < 0 . 
+        if(currentFloor == 5){ //the only way to go is down from the top-most floor
+            direction = false;
+        }
+        if(currentFloor == 0){ //the only way to go is up from the bottom-most floor
+            direction = true;
+        } // two if-statements used to prevent infinite loop of passenger waiting for elevator that goes to -/+ infinity
         if (direction) currentFloor++;
         else currentFloor--;
 

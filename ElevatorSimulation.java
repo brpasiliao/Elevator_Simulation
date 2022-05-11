@@ -8,9 +8,9 @@ class ElevatorSimulation {
     public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
 
     //collecting simulation data from passengers
-    static float[] waitingTime; // time passengers spend waiting for elevator
-    static float[] ridingTime; // time passengers spend in the elevator
-    static float[] systemTime; //system time equals waiting time plus riding time
+    static float[] waitingTime = new float[10]; // time passengers spend waiting for elevator
+    static float[] ridingTime = new float[10]; // time passengers spend in the elevator
+    static float[] systemTime = new float[10]; //system time equals waiting time plus riding time
 
     public static void main(final String[] args) {
     // public static void program() {
@@ -20,7 +20,7 @@ class ElevatorSimulation {
         }
 
         // initializes people
-        for (int i = 1; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
             peopleSystem.add(new Person(i));
             waitingTime[i] = 0.0f; //all waiting times set to zero initially
         }
@@ -112,7 +112,7 @@ class ElevatorSimulation {
         }
 
         // using collected data to calculate results, and outputting them
-    }
+    }//main
 
     // closest elevator picks person(s) up
     public static Elevator dispatch(Person p) {
@@ -155,4 +155,38 @@ class ElevatorSimulation {
             peopleSystem.set(i, peopleSystem.get(i+1));
         peopleSystem.set(pos, p);
     }
+
+    public void displayVisuals(Elevator[] elevators){ // work in progress
+
+        for(int i = 6; i > 0 ; i--){
+            System.out.print(i+": ");
+            for (int j = 0; j > 4; j++){
+                if(elevators[j].currentFloor == i){
+                    System.out.print("[] ");
+                }
+                else{
+                    System.out.print("__ ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
+
+/*
+Visualization:
+
+ __ is a floor
+ [] is an elevator
+ 6 floors (rows) * 4 elevators (columns)
+
+ Ex output:
+
+ 6: __ [] __ __
+ 5: __ __ __ __
+ 4: [] __ __ __
+ 3: __ __ [] __
+ 2: __ __ __ __
+ 1: __ __ __ []
+ E: 1  2  3  4
+*/
