@@ -41,7 +41,7 @@ class ElevatorSimulation {
                 if (p.getElevator() == null) {
                     // call an elevator
                     if (p.first) {
-                        System.out.println(p.nextTime + ":\tPerson" + p.id + " arrived on floor " + p.getFloorFrom() + " to " + p.getFloorTo());
+                        System.out.println(p.nextTime + ":\tPerson" + p.id + " arrived on floor " + p.getFloorFrom() + " , going to " + p.getFloorTo());
                         p.first = false;
                     }
                     Elevator e = dispatch(p);
@@ -191,7 +191,7 @@ class ElevatorSimulation {
             }
             System.out.println();
         }
-        System.out.println("-----------");
+        System.out.println("E: 1  2  3  4\n");
     }
 }
 
