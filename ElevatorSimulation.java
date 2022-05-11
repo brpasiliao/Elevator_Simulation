@@ -5,7 +5,7 @@ import java.lang.Math;
 class ElevatorSimulation {
 
     public static Elevator[] elevators = new Elevator[4];
-    public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
+    public static ArrayList<Person> peopleSystem = new ArrayList<Person>(); // future events list
 
     //collecting simulation data from passengers
     static float[] waitingTime = new float[10]; // time passengers spend waiting for elevator
@@ -22,18 +22,21 @@ class ElevatorSimulation {
         // initializes people
         for (int i = 0; i < 10; i++) {
             peopleSystem.add(new Person(i));
-            waitingTime[i] = 0.0f; //all waiting times set to zero initially
+            //all times initialized to zero
+            waitingTime[i] = 0.0f;
+            ridingTime[i] = 0.0f;
+            systemTime[i] = 0.0f;
         }
 
         Person p;
 
-        while (!peopleSystem.isEmpty()) {
+        while (!peopleSystem.isEmpty()) { // while fel is not empty
             // handles p assuming p is the next event to happen
             p = peopleSystem.get(0);
 
             // if p is waiting for an elevator
             if (p.status == "waiting") {
-                waitingTime[p.getId()] += p.nextTime; // increases waiting time by however much
+                waitingTime[p.getId()] += p.nextTime; // increases waiting time
                 // if p does not have an elevator being sent to them
                 if (p.getElevator() == null) {
                     // call an elevator
@@ -88,6 +91,7 @@ class ElevatorSimulation {
 
             // if p is riding the elevator
             else if (p.status == "riding") {
+                ridingTime[p.getId()] = p.nextTime;
                 System.out.println(p.nextTime + ":\tPerson" + p.id + " is riding Elevator" + p.elevator.id + " (" + p.elevator.currentFloor + "/" + p.getFloorTo() + ")");
                 p.elevator.move();
 
@@ -100,6 +104,7 @@ class ElevatorSimulation {
 
             // if p is leaving the elevator
             else if (p.status == "leaving") {
+                systemTime[p.getId()] = waitingTime[p.getId()] + ridingTime[p.getId()]; // collecting system time of passengers
                 System.out.println(p.nextTime + ":\tPerson" + p.id + " is leaving");
                 p.elevator.leave(p);
                 System.out.println(p.nextTime + ":\tPerson" + p.id + " left from floor " + p.getFloorFrom() + " to " + p.getFloorTo());
@@ -109,10 +114,26 @@ class ElevatorSimulation {
 
             // sort to chronological order of events
             Collections.sort(peopleSystem, Person.TimeComparator);
+
+            //displaying text visual
+            displayVisuals(elevators);
         }
 
         // using collected data to calculate results, and outputting them
-    }//main
+        float totalWait=0.0f;
+        float totalRide=0.0f;
+        float totalSysTime=0.0f;
+
+        for(int i = 0; i < 10; i++){
+            totalWait+=waitingTime[i];
+            totalRide+=ridingTime[i];
+            totalSysTime+=systemTime[i];
+        }
+
+        System.out.println("On average, a person waited "+ totalWait/100 +" in the system");
+        System.out.println("On average, a person rode "+ totalRide/100 +" in the system");
+        System.out.println("On average, a person existed "+ totalSysTime/100 +" in the system");
+    }//end main
 
     // closest elevator picks person(s) up
     public static Elevator dispatch(Person p) {
@@ -156,7 +177,7 @@ class ElevatorSimulation {
         peopleSystem.set(pos, p);
     }
 
-    public void displayVisuals(Elevator[] elevators){ // work in progress
+    public static void displayVisuals(Elevator[] elevators){ // Extra Credit for Visualization
 
         for(int i = 6; i > 0 ; i--){
             System.out.print(i+": ");
@@ -170,6 +191,7 @@ class ElevatorSimulation {
             }
             System.out.println();
         }
+        System.out.println("-----------");
     }
 }
 
