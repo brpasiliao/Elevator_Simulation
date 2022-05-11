@@ -191,7 +191,7 @@ class ElevatorSimulation {
             }
             System.out.println();
         }
-        System.out.println("E: 1  2  3  4\n");
+        System.out.println("E: 0  1  2  3\n");
     }
 }
 
