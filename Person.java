@@ -7,13 +7,15 @@ public class Person {
     private boolean direction;              // which direction to go to, 0 - down, 1 - up
     String status;                          // waiting, entering, riding, leaving
     boolean first;
-    // boolean insert;
     boolean stuck;
     Elevator elevator;
 
-    static float systemTime = 0;    // sum of arrival times
+    static float systemTime = 0f;           // sum of arrival times
     float arrivalTime;                      // time person arrives after previous
     float nextTime;                         // system time when the person's next event will happen
+
+    static float waitingTime = 0f;          // time passengers spend waiting for elevator
+    static float ridingTime = 0f;           // time passengers spend in the elevator
 
     int id;
 
