@@ -5,7 +5,9 @@ import java.lang.Math;
 class ElevatorSimulation {
 
     public static Elevator[] elevators = new Elevator[4];
-    public static ArrayList<Person> peopleSystem = new ArrayList<Person>(); // future events list
+    // FUTURE EVENTS LIST
+    public static ArrayList<Person> peopleSystem = new ArrayList<Person>();
+    public static int prints = 0;
 
     public static void main(final String[] args) {
     // public static void program() {
@@ -29,10 +31,11 @@ class ElevatorSimulation {
 
                 // if p does not have an elevator being sent to them
                 if (p.getElevator() == null) {
-                    // if just arrived, declare arrival and generate new person
+                    // IF JUST ARRIVED, DECLARE ARRIVAL AND GENERATE NEW PERSON
                     if (p.first) {
                         print(p, "arrived");
-                        if (PersonID < Integer.valueOf(args[0])) peopleSystem.add(new Person(PersonID++));
+                        if (PersonID < Integer.valueOf(args[0]))
+                            peopleSystem.add(new Person(PersonID++));
                         p.first = false;
                     }
                     // call an elevator
@@ -104,13 +107,13 @@ class ElevatorSimulation {
                 peopleSystem.remove(0);
             }
 
-            // sort to chronological order of events
+            // SORTS FEL IN TIME ORDER
             Collections.sort(peopleSystem, Person.TimeComparator);
         }
 
-        System.out.println("On average, a person waited " + Person.waitingTime/10 + " in the system");
-        System.out.println("On average, a person rode " + Person.ridingTime/10 + " in the system");
-        System.out.println("On average, a person existed " + (Person.waitingTime/10 + Person.ridingTime/10) + " in the system");
+        // System.out.println("On average, a person waited " + Person.waitingTime/10 + " in the system");
+        // System.out.println("On average, a person rode " + Person.ridingTime/10 + " in the system");
+        // System.out.println("On average, a person existed " + (Person.waitingTime/10 + Person.ridingTime/10) + " in the system");
     
     } //end main
 
@@ -157,12 +160,22 @@ class ElevatorSimulation {
     }
 
     public static void print(Person p, String status) {
-        System.out.println(p.nextTime + ":\tPerson" + p.id + " [" + p.getFloorFrom() + "-" + p.getFloorTo() + "] " + status);
-        displayVisuals();
+        if (prints++ < 20) {
+            System.out.println(prints + " | " + p.nextTime + ": Person" + p.id + " [" + p.getFloorFrom() + "-" + p.getFloorTo() + "] " + status);
+            System.out.println("FEL:");
+            for (int i = 0; i < peopleSystem.size(); i++) {
+                System.out.println("\t" + peopleSystem.get(i).nextTime + ": Person" + peopleSystem.get(i).getId() + " is " + peopleSystem.get(i).status);
+            }
+            System.out.print("\n");
+        }
+
+        // displayVisuals();
     }
 
-    public static void displayVisuals() { // Extra Credit for Visualization
+    // Extra Credit for Visualization
+    public static void displayVisuals() { 
         for (int i = 5; i > -1 ; i--){
+
             System.out.print(i + ": ");
             for (int j = 0; j < 4; j++){
                 if (elevators[j].currentFloor == i) {
@@ -172,6 +185,15 @@ class ElevatorSimulation {
                     System.out.print("__ ");
                 }
             }
+
+            System.out.print("| ");
+            for (int j = 0; j < peopleSystem.size(); j++) {
+                if (peopleSystem.get(j).status == "waiting" && 
+                    peopleSystem.get(j).getFloorFrom() == i &&
+                    !peopleSystem.get(j).first)
+                    System.out.print("(" + peopleSystem.get(j).getId() + ")");
+            }
+
             System.out.println();
         }
         System.out.println("E: 0  1  2  3\n");
@@ -180,18 +202,17 @@ class ElevatorSimulation {
 
 /*
 Visualization:
+    __ is a floor
+    [] is an elevator
+    6 floors (rows) * 4 elevators (columns)
 
- __ is a floor
- [] is an elevator
- 6 floors (rows) * 4 elevators (columns)
+    Ex output:
 
- Ex output:
-
- 6: __ [] __ __
- 5: __ __ __ __
- 4: [] __ __ __
- 3: __ __ [] __
- 2: __ __ __ __
- 1: __ __ __ []
- E: 1  2  3  4
+    6: __ [] __ __
+    5: __ __ __ __
+    4: [] __ __ __
+    3: __ __ [] __
+    2: __ __ __ __
+    1: __ __ __ []
+    E: 1  2  3  4
 */

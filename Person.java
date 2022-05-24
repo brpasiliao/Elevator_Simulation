@@ -37,7 +37,7 @@ public class Person {
         stuck = false;
         elevator = null;
 
-        // random float averages to 6, rounded to 2 decimal places
+        // EXPONENTIAL DISTRIBUTION OF ARRIVAL TIME AVERAGES TO 6 SECONDS
         arrivalTime = -6 * (float)Math.log(1 - random.nextFloat());
         systemTime += arrivalTime;
         nextTime = systemTime;
