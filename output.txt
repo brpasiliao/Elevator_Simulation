@@ -1,150 +1,316 @@
-1 | 8.415339: Person0 [1-4] arrived
+1 | 4.0780754: Person0 [0-4] arrived
 FEL:
-	8.415339: Person0 is waiting
+        4.0780754: Person0 is waiting
 
-2 | 8.415339: Person0 [1-4] is waiting for Elevator0 [0]
-FEL:
-	8.415339: Person0 is waiting
-	10.186853: Person1 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: __ __ __ __ |
+0: [] [] [] [] |
+E: 0  1  2  3
 
-3 | 10.186853: Person1 [1-5] arrived
+2 | 4.0780754: Person0 [0-4] is entering Elevator0
 FEL:
-	10.186853: Person1 is waiting
-	14.415339: Person0 is waiting
+        4.0780754: Person0 is entering
+        5.02116: Person1 is waiting
 
-4 | 10.186853: Person1 [1-5] is entering Elevator0
-FEL:
-	10.186853: Person1 is entering
-	10.655669: Person2 is waiting
-	14.415339: Person0 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: __ __ __ __ |
+0: [] [] [] [] |
+E: 0  1  2  3
 
-5 | 10.655669: Person2 [0-4] arrived
+3 | 5.02116: Person1 [0-3] arrived
 FEL:
-	10.655669: Person2 is waiting
-	12.186853: Person1 is riding
-	16.41534: Person0 is waiting
+        5.02116: Person1 is waiting
+        6.0780754: Person0 is riding
 
-6 | 10.655669: Person2 [0-4] is entering Elevator1
-FEL:
-	10.655669: Person2 is entering
-	12.186853: Person1 is riding
-	16.41534: Person0 is waiting
-	17.283913: Person3 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: __ __ __ __ |
+0: [] [] [] [] |
+E: 0  1  2  3
 
-7 | 12.186853: Person1 [1-5] is riding Elevator0 [1]
+4 | 5.02116: Person1 [0-3] is entering Elevator0
 FEL:
-	12.186853: Person1 is riding
-	12.655669: Person2 is riding
-	16.41534: Person0 is waiting
-	17.283913: Person3 is waiting
+        5.02116: Person1 is entering
+        6.0780754: Person0 is riding
+        14.349477: Person2 is waiting
 
-8 | 12.655669: Person2 [0-4] is riding Elevator1 [0]
-FEL:
-	12.655669: Person2 is riding
-	17.283913: Person3 is waiting
-	18.186853: Person1 is riding
-	22.41534: Person0 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: __ __ __ __ |
+0: [] [] [] [] |
+E: 0  1  2  3
 
-9 | 17.283913: Person3 [3-0] arrived
+5 | 7.02116: Person1 [0-3] is riding Elevator0 [0]
 FEL:
-	17.283913: Person3 is waiting
-	18.186853: Person1 is riding
-	18.65567: Person2 is riding
-	22.41534: Person0 is waiting
+        7.02116: Person1 is riding
+        8.078075: Person0 is riding
+        14.349477: Person2 is waiting
 
-10 | 17.283913: Person3 [3-0] is waiting for Elevator2 [0]
-FEL:
-	17.283913: Person3 is waiting
-	18.186853: Person1 is riding
-	18.65567: Person2 is riding
-	22.41534: Person0 is waiting
-	22.214224: Person4 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: __ __ __ __ |
+0: [] [] [] [] |
+E: 0  1  2  3
 
-11 | 18.186853: Person1 [1-5] is riding Elevator0 [2]
+6 | 13.02116: Person1 [0-3] is riding Elevator0 [1]
 FEL:
-	18.186853: Person1 is riding
-	18.65567: Person2 is riding
-	22.214224: Person4 is waiting
-	22.41534: Person0 is waiting
-	23.283913: Person3 is waiting
+        13.02116: Person1 is riding
+        14.078075: Person0 is riding
+        14.349477: Person2 is waiting
 
-12 | 18.65567: Person2 [0-4] is riding Elevator1 [1]
-FEL:
-	18.65567: Person2 is riding
-	22.214224: Person4 is waiting
-	23.283913: Person3 is waiting
-	24.186853: Person1 is riding
-	28.41534: Person0 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: __ __ __ __ |
+1: [] __ __ __ |
+0: __ [] [] [] |
+E: 0  1  2  3
 
-13 | 22.214224: Person4 [0-2] arrived
+7 | 14.349477: Person2 [5-0] arrived
 FEL:
-	22.214224: Person4 is waiting
-	23.283913: Person3 is waiting
-	24.186853: Person1 is riding
-	24.65567: Person2 is riding
-	28.41534: Person0 is waiting
+        14.349477: Person2 is waiting
+        19.02116: Person1 is riding
+        20.078075: Person0 is riding
 
-14 | 22.214224: Person4 [0-2] is entering Elevator3
-FEL:
-	22.214224: Person4 is entering
-	23.283913: Person3 is waiting
-	24.186853: Person1 is riding
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	28.41534: Person0 is waiting
+5: __ __ __ __ |
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: [] __ __ __ |
+1: __ __ __ __ |
+0: __ [] [] [] |
+E: 0  1  2  3
 
-15 | 23.283913: Person3 [3-0] is waiting for Elevator2 [1]
+8 | 14.349477: Person2 [5-0] is waiting for Elevator1 [0]
 FEL:
-	23.283913: Person3 is waiting
-	24.186853: Person1 is riding
-	24.214224: Person4 is riding
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	28.41534: Person0 is waiting
+        14.349477: Person2 is waiting
+        19.02116: Person1 is riding
+        20.078075: Person0 is riding
+        19.0893: Person3 is waiting
 
-16 | 24.186853: Person1 [1-5] is riding Elevator0 [3]
-FEL:
-	24.186853: Person1 is riding
-	24.214224: Person4 is riding
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	28.41534: Person0 is waiting
-	29.283913: Person3 is waiting
+5: __ __ __ __ | (2)
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: [] __ __ __ |
+1: __ __ __ __ |
+0: __ [] [] [] |
+E: 0  1  2  3
 
-17 | 24.214224: Person4 [0-2] is riding Elevator3 [0]
+9 | 19.02116: Person1 [0-3] is riding Elevator0 [2]
 FEL:
-	24.214224: Person4 is riding
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	29.283913: Person3 is waiting
-	30.186853: Person1 is riding
-	34.41534: Person0 is waiting
+        19.02116: Person1 is riding
+        19.0893: Person3 is waiting
+        20.078075: Person0 is riding
+        20.349476: Person2 is waiting
 
-18 | 24.37921: Person5 [0-5] arrived
-FEL:
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	29.283913: Person3 is waiting
-	30.186853: Person1 is riding
-	30.214224: Person4 is riding
-	34.41534: Person0 is waiting
+5: __ __ __ __ | (2)
+4: __ __ __ __ |
+3: __ __ __ __ |
+2: [] __ __ __ |
+1: __ [] __ __ |
+0: __ __ [] [] | 
+E: 0  1  2  3
 
-19 | 24.37921: Person5 [0-5] cannot call any elevators
+10 | 19.0893: Person3 [4-5] arrived
 FEL:
-	24.37921: Person5 is waiting
-	24.65567: Person2 is riding
-	29.283913: Person3 is waiting
-	30.186853: Person1 is riding
-	30.214224: Person4 is riding
-	34.41534: Person0 is waiting
-	25.456305: Person6 is waiting
+        19.0893: Person3 is waiting
+        20.349476: Person2 is waiting
+        25.02116: Person1 is leaving
+        26.078075: Person0 is riding
 
-20 | 24.65567: Person2 [0-4] is riding Elevator1 [2]
+5: __ __ __ __ | (2)
+4: __ __ __ __ |
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] __ __ |
+0: __ __ [] [] |
+E: 0  1  2  3
+
+11 | 19.0893: Person3 [4-5] is waiting for Elevator2 [0]
 FEL:
-	24.65567: Person2 is riding
-	24.65567: Person5 is waiting
-	25.456305: Person6 is waiting
-	29.283913: Person3 is waiting
-	30.186853: Person1 is riding
-	30.214224: Person4 is riding
-	34.41534: Person0 is waiting
+        19.0893: Person3 is waiting
+        20.349476: Person2 is waiting
+        25.02116: Person1 is leaving
+        26.078075: Person0 is riding
+        19.506193: Person4 is waiting
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] __ __ |
+0: __ __ [] [] |
+E: 0  1  2  3
+
+12 | 19.506193: Person4 [0-5] arrived
+FEL:
+        19.506193: Person4 is waiting
+        20.349476: Person2 is waiting
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+13 | 19.506193: Person4 [0-5] is entering Elevator3
+FEL:
+        19.506193: Person4 is entering
+        19.589207: Person5 is waiting
+        20.349476: Person2 is waiting
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+14 | 19.589207: Person5 [4-1] arrived
+FEL:
+        19.589207: Person5 is waiting
+        20.349476: Person2 is waiting
+        21.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+15 | 19.589207: Person5 [4-1] cannot call any elevators
+FEL:
+        19.589207: Person5 is waiting
+        20.349476: Person2 is waiting
+        21.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+        20.190601: Person6 is waiting
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+16 | 20.190601: Person6 [0-5] arrived
+FEL:
+        20.190601: Person6 is waiting
+        20.349476: Person2 is waiting
+        20.349476: Person5 is waiting
+        21.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+17 | 20.190601: Person6 [0-5] is entering Elevator3
+FEL:
+        20.190601: Person6 is entering
+        20.349476: Person2 is waiting
+        20.349476: Person5 is waiting
+        21.506193: Person4 is riding
+        22.986937: Person7 is waiting
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ __ __ __ |
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+18 | 20.349476: Person2 [5-0] is waiting for Elevator1 [1]
+FEL:
+        20.349476: Person2 is waiting
+        20.349476: Person5 is waiting
+        22.190601: Person6 is riding
+        22.986937: Person7 is waiting
+        23.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ __ __ __ | 
+1: __ [] [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+19 | 20.349476: Person5 [4-1] cannot call any elevators
+FEL:
+        20.349476: Person5 is waiting
+        22.190601: Person6 is riding
+        22.986937: Person7 is waiting
+        23.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+        26.349476: Person2 is waiting
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ [] __ __ |
+1: __ __ [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3
+
+20 | 22.190601: Person6 [0-5] is riding Elevator3 [0]
+FEL:
+        22.190601: Person6 is riding
+        22.190601: Person5 is waiting
+        22.986937: Person7 is waiting
+        23.506193: Person4 is riding
+        25.02116: Person1 is leaving
+        25.0893: Person3 is waiting
+        26.078075: Person0 is riding
+        26.349476: Person2 is waiting
+
+5: __ __ __ __ | (2)
+4: __ __ __ __ | (5)(3)
+3: [] __ __ __ |
+2: __ [] __ __ |
+1: __ __ [] __ |
+0: __ __ __ [] |
+E: 0  1  2  3

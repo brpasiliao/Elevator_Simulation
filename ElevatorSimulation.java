@@ -167,9 +167,9 @@ class ElevatorSimulation {
                 System.out.println("\t" + peopleSystem.get(i).nextTime + ": Person" + peopleSystem.get(i).getId() + " is " + peopleSystem.get(i).status);
             }
             System.out.print("\n");
-        }
 
-        // displayVisuals();
+            displayVisuals(); // extra credit for displaying elevator positions in diagram
+        }
     }
 
     // Extra Credit for Visualization
